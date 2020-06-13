@@ -1,0 +1,32 @@
+{% extends 'reference/base.html' %}
+
+{% block title %}
+    References
+{% endblock title %}
+
+
+{% block content %}
+    <h1>References List</h1>
+    
+    {% for reference in references %}
+        <h2>
+            <a href="{{ reference.get_absolute_url }}"></a>
+            {{ reference.title }}
+        </h2>
+        <p class="date">
+            Created {{ reference.created }} by {{ reference.author }}
+        </p>
+        {{ reference.description|truncatewords_html:30 }}
+        <p>
+            
+            {% if reference.author == request.author %}
+                <a href="{% url 'reference:referenceUpdate' reference.id reference.slug %}">Update Reference</a>
+                <a href="{% url 'reference:referenceDelete' reference.id reference.slug %}">Delete Reference</a>
+            {% endif %}
+                
+        </p>
+    {% endfor %}
+    {% include "pagination.html" with page=page.obj %}
+{% endblock content %}
+    
+    

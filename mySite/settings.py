@@ -36,6 +36,7 @@ SITE_ID = 1
 INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'blog.apps.BlogConfig',
+    'reference.apps.ReferenceConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

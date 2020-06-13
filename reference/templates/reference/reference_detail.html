@@ -1,0 +1,20 @@
+{{% extends 'reference/base.html' %}}
+
+
+{% block title %}
+    Reference Detail
+{% endblock title %}
+
+
+{% block content %}
+    <h1>
+        {{ reference.title }}
+    </h1>
+    <p class="date">
+        Created {{ reference.create }} by {{ reference.author }}
+    </p>
+
+    {{ reference.description|markdown }}
+{% endblock content %}
+    
+    
