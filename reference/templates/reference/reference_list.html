@@ -1,32 +1,26 @@
 {% extends 'reference/base_reference.html' %}
 
-{% block title %}
-    References
-{% endblock title %}
+{% block title %}Reference of My Blog{% endblock title %}
 
 
 {% block content %}
-    <h1>References List</h1>
-    
-    {% for reference in references %}
-        <h2>
-            <a href="{{ reference.get_absolute_url }}"></a>
-            {{ reference.title }}
-        </h2>
-        <p class="date">
-            Created {{ reference.created }} by {{ reference.author }}
-        </p>
-        {{ reference.description|truncatewords_html:30 }}
-        <p>
-            
-            {% if reference.author == request.author %}
-                <a href="{% url 'reference:referenceUpdate' reference.id reference.slug %}">Update Reference</a>
-                <a href="{% url 'reference:referenceDelete' reference.id reference.slug %}">Delete Reference</a>
-            {% endif %}
-                
-        </p>
-    {% endfor %}
-    {% include "pagination.html" with page=page.obj %}
+<h1>Reference of My Blog</h1>
+
+{% for reference in references %}
+<h2>
+    <a href="{{ reference.get_absolute_url }}">
+        {{ reference.title }}
+    </a>
+</h2>
+<p class="date">
+    Published {{ reference.publish }} by {{ reference.author }}
+</p>
+{{ reference.description }}
+<p>
+    <a href="{{reference.link}}">{{ reference.link }}</a>
+</p>
+<a href="{% url 'reference:reference_update' reference.id %}">Update Reference</a> |
+<a href="{% url 'reference:reference_delete' reference.id %}">Delete Reference</a>
+{% endfor %}
+{% include 'pagination.html' with page=references %}
 {% endblock content %}
-    
-    
